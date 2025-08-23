@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Call</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-name">
+                <h1>TRADER BROTHERS</h1>
+                <div class="company-tagline">Professional Trade Services</div>
+            </div>
+            <div class="booking-section">
+                <h2>Book Your Call</h2>
+                <p>Schedule a conversation that works for you</p>
+            </div>
+        </div>
+
+        <form id="bookingForm">
+            <!-- Name Input -->
+            <div class="form-group">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="form-group">
+                <label>Select Date & Time *</label>
+                <div class="calendar-section">
+                    <input type="date" id="dateInput" name="date" class="form-input" required>
+                </div>
+                <div class="time-section">
+                    <select id="time" name="time" class="form-input" required>
+                        <option value="">Select Time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="09:30">9:30 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="10:30">10:30 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="11:30">11:30 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="12:30">12:30 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="13:30">1:30 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="14:30">2:30 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="15:30">3:30 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="16:30">4:30 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Call Type Selection -->
+            <div class="form-group">
+                <label>How would you like to connect? *</label>
+                <div class="call-type-section">
+                    <div class="checkbox-option" onclick="selectCallType('video')">
+                        <input type="checkbox" id="videoCall" name="callType" value="video">
+                        <span class="icon">📹</span>
+                        <div>Video Call</div>
+                    </div>
+                    <div class="checkbox-option" onclick="selectCallType('mobile')">
+                        <input type="checkbox" id="mobileCall" name="callType" value="mobile">
+                        <span class="icon">📱</span>
+                        <div>Mobile Call</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone Confirmation Section -->
+            <div id="phoneSection" class="hidden">
+                <div class="phone-confirmation">
+                    <p><strong>Is this your number?</strong></p>
+                    <p id="detectedPhone" style="font-size: 18px; margin: 8px 0; color: #2d3748;"></p>
+                    <div class="confirmation-buttons">
+                        <div class="confirmation-btn" onclick="confirmPhone(true)">
+                            Yes
+                        </div>
+                        <div class="confirmation-btn" onclick="confirmPhone(false)">
+                            No
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Phone Number Input -->
+            <div id="customPhoneSection" class="form-group hidden">
+                <label for="customPhone">Please enter your phone number *</label>
+                <input type="tel" id="customPhone" name="customPhone" class="form-input" placeholder="+1 (555) 123-4567">
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Booking
+            </button>
+        </form>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen hidden">
+            <div class="loading-spinner"></div>
+            <h3>Processing Your Booking</h3>
+            <p>Please wait while we confirm your appointment...</p>
+            <div class="loading-details">
+                <div>Booking ID: <span id="loadingBookingId" class="booking-id"></span></div>
+                <div style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
+                    We're processing your request and will confirm shortly.
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Screen -->
+        <div id="errorScreen" class="error-screen hidden">
+            <h3>Booking Timeout</h3>
+            <p>We're having trouble confirming your booking. Please try again.</p>
+            <div id="errorBookingId" style="margin: 16px 0; font-size: 14px; opacity: 0.9;"></div>
+            <button class="retry-btn" onclick="retryBooking()">Try Again</button>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message hidden">
+            <h3>Thank you for your booking!</h3>
+            <p>Your call has been scheduled successfully. We'll be in touch soon!</p>
+            <div class="booking-details">
+                <h4>Booking Details:</h4>
+                <div id="bookingDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
