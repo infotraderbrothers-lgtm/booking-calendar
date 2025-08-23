@@ -1,0 +1,477 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.company-name {
+    background: linear-gradient(135deg, #2d3748, #4a5568);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    border: 3px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(45, 55, 72, 0.2);
+}
+
+.company-name h1 {
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.company-tagline {
+    color: #cbd5e0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.booking-section h2 {
+    color: #2d3748;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #718096;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.calendar-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.time-section {
+    margin-top: 16px;
+}
+
+.call-type-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.checkbox-option {
+    position: relative;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    text-align: center;
+}
+
+.checkbox-option:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.checkbox-option.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.checkbox-option input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-option .icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.phone-confirmation {
+    margin-top: 16px;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.confirmation-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.confirmation-btn {
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-weight: 600;
+}
+
+.confirmation-btn:hover {
+    border-color: #667eea;
+}
+
+.confirmation-btn.selected {
+    border-color: #667eea;
+    background: #667eea;
+    color: white;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 32px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none;
+}
+
+.success-message {
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+    animation: slideInSuccess 0.5s ease-out;
+}
+
+.success-message h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.loading-screen {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-screen h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.loading-screen p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.loading-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.error-screen,
+#customErrorMessage {
+    background: linear-gradient(135deg, #e53e3e, #c53030);
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+    animation: slideInError 0.5s ease-out;
+}
+
+.error-screen h3,
+#customErrorMessage h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.retry-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.retry-btn:hover {
+    background: white;
+    color: #e53e3e;
+}
+
+.booking-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    text-align: left;
+}
+
+.booking-details h4 {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.booking-details p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.booking-id {
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Select dropdown styling */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .company-name h1 {
+        font-size: 24px;
+    }
+    
+    .call-type-section {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .confirmation-buttons {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
+
+/* Focus states for accessibility */
+.submit-btn:focus,
+.retry-btn:focus,
+.confirmation-btn:focus,
+.checkbox-option:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Loading state for submit button */
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Animations */
+@keyframes slideInSuccess {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInError {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    to {
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
+    }
+}
+
+/* Enhanced button hover states */
+.confirmation-btn,
+.checkbox-option {
+    transition: all 0.2s ease;
+}
+
+/* Improved form validation styles */
+.form-input:invalid {
+    border-color: #e53e3e;
+}
+
+.form-input:invalid:focus {
+    border-color: #e53e3e;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+/* Status indicator styles */
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-indicator.confirmed {
+    background-color: #48bb78;
+}
+
+.status-indicator.pending {
+    background-color: #ed8936;
+}
+
+.status-indicator.error {
+    background-color: #e53e3e;
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .container {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .loading-screen,
+    .error-screen,
+    #customErrorMessage {
+        background: #f5f5f5 !important;
+        color: #333 !important;
+    }
+    
+    .success-message {
+        background: #e6fffa !important;
+        color: #234e52 !important;
+    }
+}
