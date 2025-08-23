@@ -8,7 +8,7 @@ let currentBookingData = null;
 const CONFIG = {
     webhookUrl: 'https://hook.eu2.make.com/969nskx4hbgd2nn4wh1p4a15rh0630v1',
     confirmationUrl: 'https://your-confirmation-endpoint.com/confirm', // Replace with your actual endpoint
-    bearerToken: 'your-bearer-token-here', // Replace with your actual bearer token
+    bearerToken: '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', // Replace with your actual bearer token
     timeoutDuration: 45000, // 45 seconds
     retryAttempts: 3,
     retryDelay: 2000 // 2 seconds
