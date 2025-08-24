@@ -4,7 +4,379 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Your Call</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .company-name {
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(45, 55, 72, 0.2);
+        }
+
+        .company-name h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .company-tagline {
+            color: #cbd5e0;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .booking-section h2 {
+            color: #2d3748;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .calendar-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .time-section {
+            margin-top: 16px;
+        }
+
+        .call-type-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .checkbox-option {
+            position: relative;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            text-align: center;
+        }
+
+        .checkbox-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .checkbox-option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-option .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .phone-confirmation {
+            margin-top: 16px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .confirmation-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .confirmation-btn {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .confirmation-btn:hover {
+            border-color: #667eea;
+        }
+
+        .confirmation-btn.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 32px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .loading-screen {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-screen h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .loading-screen p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+            animation: slideInSuccess 0.5s ease-out;
+        }
+
+        .success-message h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .error-screen {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+            animation: slideInError 0.5s ease-out;
+        }
+
+        .error-screen h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .retry-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .retry-btn:hover {
+            background: white;
+            color: #e53e3e;
+        }
+
+        .booking-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            text-align: left;
+        }
+
+        .booking-details h4 {
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .booking-details p {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .booking-id {
+            font-family: 'Courier New', monospace;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        @keyframes slideInSuccess {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInError {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+            to { box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .company-name h1 {
+                font-size: 24px;
+            }
+            
+            .call-type-section {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .confirmation-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -19,6 +391,7 @@
             </div>
         </div>
 
+        <!-- Calendar Form -->
         <form id="bookingForm">
             <!-- Name Input -->
             <div class="form-group">
@@ -104,25 +477,18 @@
         <div id="loadingScreen" class="loading-screen hidden">
             <div class="loading-spinner"></div>
             <h3>Processing Your Booking</h3>
-            <p>Please wait while we confirm your appointment...</p>
-            <div class="loading-details">
-                <div>Booking ID: <span id="loadingBookingId" class="booking-id"></span></div>
-                <div style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
-                    We're processing your request and will confirm shortly.
-                </div>
-            </div>
+            <p>Please wait while we update our system...</p>
         </div>
 
         <!-- Error Screen -->
         <div id="errorScreen" class="error-screen hidden">
-            <h3>Booking Timeout</h3>
-            <p>We're having trouble confirming your booking. Please try again.</p>
-            <div id="errorBookingId" style="margin: 16px 0; font-size: 14px; opacity: 0.9;"></div>
+            <h3>Something went wrong</h3>
+            <p>Please try again or contact support.</p>
             <button class="retry-btn" onclick="retryBooking()">Try Again</button>
         </div>
 
-        <!-- Success Message -->
-        <div id="successMessage" class="success-message hidden">
+        <!-- Success Screen (Thank You) -->
+        <div id="successScreen" class="success-message hidden">
             <h3>Thank you for your booking!</h3>
             <p>Your call has been scheduled successfully. We'll be in touch soon!</p>
             <div class="booking-details">
@@ -132,6 +498,232 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // ===== CONFIGURATION - UPDATED WITH YOUR WEBHOOK =====
+        const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/969nskx4hbgd2nn4wh1p4a15rh0630v1';
+        
+        // ===== GLOBAL VARIABLES =====
+        let selectedCallType = null;
+        let phoneConfirmed = null;
+        let detectedPhoneNumber = null;
+
+        // ===== INITIALIZATION =====
+        // Set minimum date to today
+        document.getElementById('dateInput').min = new Date().toISOString().split('T')[0];
+
+        // ===== UTILITY FUNCTIONS =====
+        function generateBookingId() {
+            const timestamp = Date.now();
+            const random = Math.random().toString(36).substr(2, 5).toUpperCase();
+            return `TB-${timestamp}-${random}`;
+        }
+
+        function detectPhoneNumber() {
+            const mockNumbers = [
+                '+1 (555) 123-4567',
+                '+44 7700 900123',
+                '+1 (555) 987-6543'
+            ];
+            return mockNumbers[Math.floor(Math.random() * mockNumbers.length)];
+        }
+
+        function formatTime(time24) {
+            try {
+                const timeObj = new Date(`2000-01-01T${time24}`);
+                return timeObj.toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                });
+            } catch (e) {
+                return time24;
+            }
+        }
+
+        function formatDate(dateStr) {
+            try {
+                return new Date(dateStr).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateStr;
+            }
+        }
+
+        // ===== UI FUNCTIONS =====
+        function selectCallType(type) {
+            // Reset previous selections
+            document.querySelectorAll('.checkbox-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelectorAll('input[name="callType"]').forEach(input => {
+                input.checked = false;
+            });
+
+            // Select current option
+            const selectedOption = type === 'video' ? 
+                document.querySelector('.checkbox-option:first-child') : 
+                document.querySelector('.checkbox-option:last-child');
+            
+            selectedOption.classList.add('selected');
+            document.getElementById(type === 'video' ? 'videoCall' : 'mobileCall').checked = true;
+            selectedCallType = type;
+
+            // Show phone section if mobile is selected
+            if (type === 'mobile') {
+                detectedPhoneNumber = detectPhoneNumber();
+                document.getElementById('detectedPhone').textContent = detectedPhoneNumber;
+                document.getElementById('phoneSection').classList.remove('hidden');
+                document.getElementById('customPhoneSection').classList.add('hidden');
+                phoneConfirmed = null;
+                
+                // Reset confirmation buttons
+                document.querySelectorAll('.confirmation-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+            } else {
+                document.getElementById('phoneSection').classList.add('hidden');
+                document.getElementById('customPhoneSection').classList.add('hidden');
+                phoneConfirmed = null;
+            }
+        }
+
+        function confirmPhone(isCorrect) {
+            // Reset confirmation buttons
+            document.querySelectorAll('.confirmation-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Select clicked button
+            const buttons = document.querySelectorAll('.confirmation-btn');
+            if (isCorrect) {
+                buttons[0].classList.add('selected');
+                document.getElementById('customPhoneSection').classList.add('hidden');
+            } else {
+                buttons[1].classList.add('selected');
+                document.getElementById('customPhoneSection').classList.remove('hidden');
+            }
+            
+            phoneConfirmed = isCorrect;
+        }
+
+        function showLoadingScreen() {
+            document.getElementById('bookingForm').classList.add('hidden');
+            document.getElementById('errorScreen').classList.add('hidden');
+            document.getElementById('successScreen').classList.add('hidden');
+            document.getElementById('loadingScreen').classList.remove('hidden');
+            document.getElementById('loadingScreen').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showSuccessScreen(bookingData) {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('errorScreen').classList.add('hidden');
+            
+            // Update booking details
+            const detailsDiv = document.getElementById('bookingDetails');
+            detailsDiv.innerHTML = `
+                <p><strong>Booking ID:</strong> <span class="booking-id">${bookingData.bookingId}</span></p>
+                <p><strong>Name:</strong> ${bookingData.name}</p>
+                <p><strong>Date:</strong> ${formatDate(bookingData.date)}</p>
+                <p><strong>Time:</strong> ${formatTime(bookingData.time)}</p>
+                <p><strong>Call Type:</strong> ${bookingData.callType === 'video' ? 'Video Call' : 'Mobile Call'}</p>
+                ${bookingData.phoneNumber ? `<p><strong>Phone:</strong> ${bookingData.phoneNumber}</p>` : ''}
+            `;
+
+            document.getElementById('successScreen').classList.remove('hidden');
+            document.getElementById('successScreen').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showErrorScreen() {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('successScreen').classList.add('hidden');
+            document.getElementById('errorScreen').classList.remove('hidden');
+            document.getElementById('errorScreen').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function retryBooking() {
+            document.getElementById('errorScreen').classList.add('hidden');
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('successScreen').classList.add('hidden');
+            document.getElementById('bookingForm').classList.remove('hidden');
+            document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== MAIN FORM SUBMISSION =====
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Validate form
+            const name = document.getElementById('name').value.trim();
+            const date = document.getElementById('dateInput').value;
+            const time = document.getElementById('time').value;
+
+            if (!name || !date || !time || !selectedCallType) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            if (selectedCallType === 'mobile' && phoneConfirmed === null) {
+                alert('Please confirm your phone number.');
+                return;
+            }
+
+            if (selectedCallType === 'mobile' && phoneConfirmed === false) {
+                const customPhone = document.getElementById('customPhone').value.trim();
+                if (!customPhone) {
+                    alert('Please enter your phone number.');
+                    return;
+                }
+            }
+
+            // Prepare booking data
+            const bookingId = generateBookingId();
+            const phoneNumber = selectedCallType === 'mobile' ? 
+                (phoneConfirmed ? detectedPhoneNumber : document.getElementById('customPhone').value) : null;
+
+            const bookingData = {
+                bookingId: bookingId,
+                name: name,
+                date: date,
+                time: time,
+                callType: selectedCallType,
+                phoneNumber: phoneNumber,
+                timestamp: new Date().toISOString(),
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            };
+
+            try {
+                // Show loading screen
+                showLoadingScreen();
+
+                // Submit directly to Make.com
+                const response = await fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                if (response.ok) {
+                    // Success! Show thank you screen
+                    showSuccessScreen(bookingData);
+                } else {
+                    // Error from Make.com
+                    console.error('Make.com error:', response.status);
+                    showErrorScreen();
+                }
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                showErrorScreen();
+            }
+        });
+
+        console.log('Booking calendar loaded and ready');
+    </script>
 </body>
 </html>
